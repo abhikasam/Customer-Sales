@@ -30,11 +30,9 @@ namespace CustomersAPI
                 new CamelCaseElementNameConvention()
             },_=> true);
 
-            builder.Services.Configure<CustomerDataCollectionSettings>(
-                builder.Configuration.GetSection("MongoDbCollectionSettings:Customer")
-                );
-
+            builder.Services.AddMongoDbCollectionSettings(builder.Configuration);
             builder.Services.AddMongoDbCollectionServices();
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
