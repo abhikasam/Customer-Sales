@@ -16,6 +16,9 @@
             services.Configure<CustomerDataCollectionSettings>(
                 configuration.GetSection("MongoDbCollectionSettings:Customer")
                 );
+            services.Configure<BooksCollectionSettings>(
+                configuration.GetSection("MongoDbCollectionSettings:Book")
+                );
         }
     }
 

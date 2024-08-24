@@ -21,5 +21,11 @@ namespace CustomersAPI.Controllers
         {
             return await customerService.GetAsync();
         }
+
+        [HttpGet("{skip}/{take}")]
+        public List<Customer> GetCustomers(int skip,int take)
+        {
+            return customerService.Get(skip,take);
+        }
     }
 }
