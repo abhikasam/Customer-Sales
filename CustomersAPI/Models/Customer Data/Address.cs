@@ -1,4 +1,4 @@
-﻿namespace CustomersAPI.Models
+﻿namespace CustomersAPI.Models.Customer_Data
 {
     public partial class Address
     {

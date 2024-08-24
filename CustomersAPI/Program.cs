@@ -1,4 +1,10 @@
 
+using CustomersAPI.Models.CollectionSettings;
+using CustomersAPI.Services;
+using MongoDB.Bson.Serialization.Conventions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+
 namespace CustomersAPI
 {
     public class Program
@@ -11,6 +17,24 @@ namespace CustomersAPI
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+            builder.Services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                });
+
+            ConventionRegistry.Register("CamelCase",new ConventionPack()
+            {
+                new CamelCaseElementNameConvention()
+            },_=> true);
+
+            builder.Services.Configure<CustomerDataCollectionSettings>(
+                builder.Configuration.GetSection("MongoDbCollectionSettings:Customer")
+                );
+
+            builder.Services.AddMongoDbCollectionServices();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
