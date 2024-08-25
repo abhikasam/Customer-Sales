@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Server.IISIntegration;
+using Microsoft.Extensions.Options;
 using Microsoft.Identity.Web;
 
 namespace CustomerApplication
@@ -19,12 +22,31 @@ namespace CustomerApplication
                     .RequireAuthenticatedUser()
                     .Build();
             });
- 
-            builder.Services.AddMicrosoftIdentityWebAppAuthentication(builder.Configuration);
+
+            builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+                .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
+
+            builder.Services.Configure<OpenIdConnectOptions>(OpenIdConnectDefaults.AuthenticationScheme, options =>
+            {
+                options.Events = new OpenIdConnectEvents()
+                {
+                    OnTokenValidated = context => Task.CompletedTask,
+                    
+                    OnAuthenticationFailed = context =>
+                    {
+                        context.Response.Redirect("/Error");
+                        context.HandleResponse();
+                        return Task.CompletedTask;
+                    }
+                };
+            });
+
+            builder.Services.AddHttpContextAccessor();
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
+
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Error");
