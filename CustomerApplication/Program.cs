@@ -1,9 +1,11 @@
+using CustomerApplication.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Server.IISIntegration;
 using Microsoft.Extensions.Options;
 using Microsoft.Identity.Web;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace CustomerApplication
 {
@@ -15,6 +17,20 @@ namespace CustomerApplication
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(1);
+                options.Cookie.IsEssential = true;
+            });
+
+            builder.Services.AddHttpContextAccessor();
+
+            builder.Services.AddHttpClient("authClient").AddHttpMessageHandler<AddAuthenticationToken>();
+
+            builder.Services.AddTransient<AddAuthenticationToken>();
+
+
 
             builder.Services.AddAuthorization(options =>
             {
@@ -30,7 +46,12 @@ namespace CustomerApplication
             {
                 options.Events = new OpenIdConnectEvents()
                 {
-                    OnTokenValidated = context => Task.CompletedTask,
+                    OnTokenValidated = context =>
+                    {
+                        var token = context.SecurityToken as JwtSecurityToken;
+                        context.HttpContext.Session.SetString("AccessToken", token.RawData);
+                        return Task.CompletedTask;
+                    },
                     
                     OnAuthenticationFailed = context =>
                     {
@@ -40,9 +61,6 @@ namespace CustomerApplication
                     }
                 };
             });
-
-            builder.Services.AddHttpContextAccessor();
-
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -59,6 +77,8 @@ namespace CustomerApplication
 
             app.UseRouting();
 
+            app.UseSession();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapRazorPages();
