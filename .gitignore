@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 /CustomersAPI/appsettings.json
 /CustomerApplication/appsettings.json
+/angularproject.client/src/app/file.ts
+/angularproject.client/src/app/publicClientApplicationDetails.ts
