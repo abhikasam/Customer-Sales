@@ -5,7 +5,9 @@ VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomersAPI", "CustomersAPI\CustomersAPI.csproj", "{37EE52F3-3DF0-4900-AE05-231180407B69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerApplication", "CustomerApplication\CustomerApplication.csproj", "{A04C94A7-AD33-4489-AC3E-5A4D49CEB1EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerApplication", "CustomerApplication\CustomerApplication.csproj", "{A04C94A7-AD33-4489-AC3E-5A4D49CEB1EA}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "angularproject.client", "angularproject.client\angularproject.client.esproj", "{BFF1F901-46BA-4A73-BE2B-444DA6248FF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,12 @@ Global
 		{A04C94A7-AD33-4489-AC3E-5A4D49CEB1EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A04C94A7-AD33-4489-AC3E-5A4D49CEB1EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A04C94A7-AD33-4489-AC3E-5A4D49CEB1EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFF1F901-46BA-4A73-BE2B-444DA6248FF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFF1F901-46BA-4A73-BE2B-444DA6248FF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFF1F901-46BA-4A73-BE2B-444DA6248FF8}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BFF1F901-46BA-4A73-BE2B-444DA6248FF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFF1F901-46BA-4A73-BE2B-444DA6248FF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFF1F901-46BA-4A73-BE2B-444DA6248FF8}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
