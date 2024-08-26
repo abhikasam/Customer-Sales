@@ -4,7 +4,7 @@ import { MSAL_GUARD_CONFIG, MsalBroadcastService, MsalGuardConfiguration, MsalSe
 import { InteractionStatus, RedirectRequest } from '@azure/msal-browser';
 import { Subject, filter, takeUntil } from 'rxjs';
 import { environment } from '../environment';
-import { AzureAdService } from './services/azure-ad.service';
+import { AzureAdService } from '../services/azure-ad.service';
 
 interface WeatherForecast {
   date: string;

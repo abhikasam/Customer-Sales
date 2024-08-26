@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AzureAdService } from '../../services/azure-ad.service';
+import { AzureAdService } from '../../../services/azure-ad.service';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +19,4 @@ export class HomeComponent implements OnInit {
       this.isUserLoggedIn=x
     })
   }
-
-
 }

@@ -9,6 +9,9 @@ import { HomeComponent } from './layout/home/home.component';
 import { ProfileComponent } from './layout/profile/profile.component';
 import { AppRoutingModule } from './app-routing.module';
 import { msalConfiguration } from './auth-config';
+import { DirectivesModule } from '../directives/directives.module';
+import { CommonModule } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,7 @@ import { msalConfiguration } from './auth-config';
     ProfileComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule, AppRoutingModule,
+    BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, DirectivesModule, CommonModule,
     MsalModule.forRoot(
       msalConfiguration,
       {

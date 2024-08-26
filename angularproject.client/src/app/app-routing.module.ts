@@ -4,24 +4,44 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './layout/home/home.component';
 import { ProfileComponent } from './layout/profile/profile.component';
 import { MsalGuard } from '@azure/msal-angular';
+import { DashboardComponent } from '../shared/dashboard/dashboard.component';
+import { AccessDeniedComponent } from '../shared/access-denied/access-denied.component';
+import { ExceptionComponent } from '../shared/exception/exception.component';
+import { FullComponent } from '../shared/full/full.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
-  },
-  {
-    path: 'profile',
-    component: ProfileComponent,
-    canActivate: [MsalGuard]
+    component: FullComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: '/dashboard',
+        pathMatch: "full",
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'access-denied',
+        component: AccessDeniedComponent,
+        pathMatch: "full"
+      },
+      {
+        path: 'error',
+        component: ExceptionComponent,
+        pathMatch: "full"
+      }
+    ]
   }
 ]
 
-
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes)
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+
+}
