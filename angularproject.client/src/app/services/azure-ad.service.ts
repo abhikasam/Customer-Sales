@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Injectable, OnInit } from '@angular/core';
+import { MsalService } from '@azure/msal-angular';
+import { InteractionRequiredAuthError } from '@azure/msal-browser';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AzureAdService {
+export class AzureAdService{
   isUserLoggedIn: Subject<boolean> = new Subject<boolean>()
-  constructor() { }
+  constructor(private authService: MsalService) { }
 }
