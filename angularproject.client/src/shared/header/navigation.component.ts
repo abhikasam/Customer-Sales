@@ -1,10 +1,14 @@
-import { Component, AfterViewInit, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, AfterViewInit, EventEmitter, Output, OnInit, Inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgbDropdownModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from '../../services/auth.service';
 import { RouteInfo } from '../sidebar/sidebar.metadata';
 import { CommonModule } from '@angular/common';
 import { DirectivesModule } from '../../directives/directives.module';
+import { MSAL_GUARD_CONFIG, MsalGuardConfiguration, MsalService } from '@azure/msal-angular';
+import { RedirectRequest } from '@azure/msal-browser';
+import { NavService } from '../../services/nav.service';
+import { environment } from '../../environment';
+import { AzureAdService } from '../../services/azure-ad.service';
 
 declare var $: any;
 
@@ -16,20 +20,38 @@ declare var $: any;
 })
 export class NavigationComponent implements OnInit {
   @Output() toggleSidebar = new EventEmitter<void>();
-
+  public isLoggedIn: boolean=false
   public showSearch = false;
-  navItems: RouteInfo[]=[]
 
   constructor(
     private modalService: NgbModal,
-    private authService: AuthService
+    private msalService: MsalService,
+    @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
+    private azureAdService: AzureAdService
   )
   { }
 
 
+  login() {
+    if (this.msalGuardConfig.authRequest) {
+      this.msalService.loginRedirect({ ...this.msalGuardConfig.authRequest } as RedirectRequest).subscribe()
+    }
+    else {
+      this.msalService.loginRedirect()
+    }
+  }
+
+
+  logout() {
+    this.msalService.logoutRedirect({
+      postLogoutRedirectUri: environment.postLogoutUrl
+    })
+  }
+
+
   ngOnInit(): void {
-    this.authService.menuItems.subscribe(items => {
-      this.navItems = items
+    this.azureAdService.isUserLoggedIn.subscribe(x => {
+      this.isLoggedIn=x
     })
   }
 }

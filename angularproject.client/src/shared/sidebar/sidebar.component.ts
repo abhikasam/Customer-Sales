@@ -4,7 +4,7 @@ import { RouteInfo } from './sidebar.metadata';
 import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule, NgIf } from '@angular/common';
-import { AuthService } from '../../services/auth.service';
+import { NavService } from '../../services/nav.service';
 //declare var $: any;
 
 @Component({
@@ -30,12 +30,12 @@ export class SidebarComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService
+    private navService: NavService
   ) { }
 
   // End open close
   ngOnInit() {
-    this.authService.sidebarItems.subscribe(items => {
+    this.navService.sidebarItems.subscribe(items => {
       this.sidebarnavItems=items
     })
   }

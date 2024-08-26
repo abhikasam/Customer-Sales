@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './layout/home/home.component';
-import { ProfileComponent } from './layout/profile/profile.component';
 import { MsalGuard } from '@azure/msal-angular';
 import { DashboardComponent } from '../shared/dashboard/dashboard.component';
 import { AccessDeniedComponent } from '../shared/access-denied/access-denied.component';

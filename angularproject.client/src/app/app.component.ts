@@ -22,7 +22,6 @@ export class AppComponent implements OnInit, OnDestroy {
   private readonly _destroy = new Subject<void>()
   public isUserLoggedIn: boolean = false
   constructor(private http: HttpClient,
-    @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
     private msalBroardCastService: MsalBroadcastService,
     private authService: MsalService, private azureAdService: AzureAdService) {
 
@@ -42,21 +41,6 @@ export class AppComponent implements OnInit, OnDestroy {
         this.isUserLoggedIn = !!this.authService.instance.getAllAccounts().length
         this.azureAdService.isUserLoggedIn.next(!!this.authService.instance.getAllAccounts().length)
       })
-  }
-
-  login() {
-    if (this.msalGuardConfig.authRequest) {
-      this.authService.loginRedirect({ ...this.msalGuardConfig.authRequest } as RedirectRequest).subscribe()
-    }
-    else {
-      this.authService.loginRedirect()
-    }
-  }
-
-  logout() {
-    this.authService.logoutRedirect({
-      postLogoutRedirectUri: environment.postLogoutUrl
-    })
   }
 
   title = 'angularproject.client';

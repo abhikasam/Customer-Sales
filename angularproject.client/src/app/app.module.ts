@@ -5,8 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { MsalGuard, MsalInterceptor, MsalModule, MsalRedirectComponent } from '@azure/msal-angular';
 import { InteractionType } from '@azure/msal-browser';
-import { HomeComponent } from './layout/home/home.component';
-import { ProfileComponent } from './layout/profile/profile.component';
 import { AppRoutingModule } from './app-routing.module';
 import { msalConfiguration } from './auth-config';
 import { DirectivesModule } from '../directives/directives.module';
@@ -15,9 +13,7 @@ import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
-    ProfileComponent
+    AppComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, DirectivesModule, CommonModule,

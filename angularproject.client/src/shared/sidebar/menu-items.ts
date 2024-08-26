@@ -10,41 +10,7 @@ export const SIDEBAR_ROUTES: RouteInfo[] = [
     extralink: false,
     submenu: [],
     authenticated: [true,false],
-    roles: [],
-    claims:[]
-  },
-  {
-    path: '/articles',
-    title: 'Articles',
-    icon: 'bi bi-newspaper',
-    class: '',
-    extralink: false,
-    submenu: [],
-    authenticated: [true,false],
-    roles: [],
-    claims:[]
-  },
-  {
-    path: '/categories',
-    title: 'Categories',
-    icon: 'bi bi-tag-fill',
-    class: '',
-    extralink: false,
-    submenu: [],
-    authenticated: [true],
-    roles: [],
-    claims:[]
-  },
-  {
-    path: '/authors',
-    title: 'Authors',
-    icon: 'bi bi-person-bounding-box',
-    class: '',
-    extralink: false,
-    submenu: [],
-    authenticated: [true],
-    roles: [],
-    claims: []
+    roles: []
   }
 ];
 

@@ -8,5 +8,4 @@ export interface RouteInfo {
   submenu: RouteInfo[];
   authenticated: boolean[];
   roles: string[];
-  claims: string[];
 }
