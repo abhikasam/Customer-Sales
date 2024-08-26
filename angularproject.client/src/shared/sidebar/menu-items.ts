@@ -9,8 +9,16 @@ export const SIDEBAR_ROUTES: RouteInfo[] = [
     class: '',
     extralink: false,
     submenu: [],
-    authenticated: [true,false],
     roles: []
-  }
+  },
+  {
+    path: '/authors',
+    title: 'Authors',
+    icon: 'bi bi-file-earmark-person',
+    class: '',
+    extralink: false,
+    submenu: [],
+    roles: []
+   }
 ];
 

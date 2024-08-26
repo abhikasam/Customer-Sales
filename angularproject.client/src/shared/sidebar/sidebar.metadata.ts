@@ -6,6 +6,5 @@ export interface RouteInfo {
   class: string;
   extralink: boolean;
   submenu: RouteInfo[];
-  authenticated: boolean[];
   roles: string[];
 }

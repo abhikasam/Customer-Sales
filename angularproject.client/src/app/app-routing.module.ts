@@ -23,6 +23,10 @@ export const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'authors',
+        loadChildren:() => import("./../components/author/author-routing.module").then(x => x.AuthorRoutingModule)
+      },
+      {
         path: 'access-denied',
         component: AccessDeniedComponent,
         pathMatch: "full"

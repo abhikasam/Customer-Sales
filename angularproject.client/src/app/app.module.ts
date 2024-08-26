@@ -10,13 +10,16 @@ import { msalConfiguration } from './auth-config';
 import { DirectivesModule } from '../directives/directives.module';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
+import { AuthorModule } from '../components/author/author.module';
+import { AuthInterceptor } from '../services/auth-interceptor';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, DirectivesModule, CommonModule,
+    BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, DirectivesModule,
+    CommonModule, AuthorModule,
     MsalModule.forRoot(
       msalConfiguration,
       {
@@ -38,7 +41,11 @@ import { SharedModule } from '../shared/shared.module';
     provide: HTTP_INTERCEPTORS,
     useClass: MsalInterceptor,
     multi: true
-  }, MsalGuard],
+  }, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi:true
+    }, MsalGuard],
   bootstrap: [AppComponent, MsalRedirectComponent]
 })
 export class AppModule { }

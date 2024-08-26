@@ -20,6 +20,7 @@ export class AuthInterceptor implements HttpInterceptor {
             Authorization: `Bearer ${tokenResponse.accessToken}`
           }
         });
+        console.log(tokenResponse)
         return next.handle(clonedRequest);
       }),
       catchError(error => {

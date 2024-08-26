@@ -23,7 +23,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public isUserLoggedIn: boolean = false
   constructor(private http: HttpClient,
     private msalBroardCastService: MsalBroadcastService,
-    private authService: MsalService, private azureAdService: AzureAdService) {
+    private msalService: MsalService, private azureAdService: AzureAdService) {
 
   }
     ngOnDestroy(): void {
@@ -38,8 +38,9 @@ export class AppComponent implements OnInit, OnDestroy {
         takeUntil(this._destroy)
       )
       .subscribe(x => {
-        this.isUserLoggedIn = !!this.authService.instance.getAllAccounts().length
-        this.azureAdService.isUserLoggedIn.next(!!this.authService.instance.getAllAccounts().length)
+        this.isUserLoggedIn = !!this.msalService.instance.getAllAccounts().length
+        this.msalService.instance.setActiveAccount(this.msalService.instance.getAllAccounts()[0])
+        this.azureAdService.isUserLoggedIn.next(!!this.msalService.instance.getAllAccounts().length)
       })
   }
 

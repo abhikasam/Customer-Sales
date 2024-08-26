@@ -19,7 +19,7 @@ namespace CustomersAPI.Controllers
         }
 
         [HttpGet]
-        public List<string> Get()
+        public IEnumerable<string> Get()
         {
             return bookService.GetAuthors();
         }
