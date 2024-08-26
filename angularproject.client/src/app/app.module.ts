@@ -4,11 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { MsalGuard, MsalInterceptor, MsalModule, MsalRedirectComponent } from '@azure/msal-angular';
-import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
-import { PublicClientApplicationDetails } from './publicClientApplicationDetails';
+import { InteractionType } from '@azure/msal-browser';
 import { HomeComponent } from './layout/home/home.component';
 import { ProfileComponent } from './layout/profile/profile.component';
 import { AppRoutingModule } from './app-routing.module';
+import { msalConfiguration } from './auth-config';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule, HttpClientModule, AppRoutingModule,
     MsalModule.forRoot(
-      PublicClientApplicationDetails,
+      msalConfiguration,
       {
         interactionType: InteractionType.Redirect,
         authRequest: {

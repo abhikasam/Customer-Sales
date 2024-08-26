@@ -20,9 +20,7 @@ export const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, {
-      initialNavigation: 'enabledNonBlocking'
-    })
+    RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]
 })

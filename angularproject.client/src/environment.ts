@@ -1,6 +1,6 @@
 
 export const environment = {
   production:false,
-  postLogoutUrl:'http://localhost:4200'
+  postLogoutUrl:'https://localhost:4200'
 }
 

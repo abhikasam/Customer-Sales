@@ -365,3 +365,4 @@ FodyWeavers.xsd
 /CustomerApplication/appsettings.json
 /angularproject.client/src/app/file.ts
 /angularproject.client/src/app/publicClientApplicationDetails.ts
+/angularproject.client/src/app/auth-config.ts
