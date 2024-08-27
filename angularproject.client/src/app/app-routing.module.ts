@@ -24,7 +24,7 @@ export const routes: Routes = [
       },
       {
         path: 'authors',
-        loadChildren:() => import("./../components/author/author-routing.module").then(x => x.AuthorRoutingModule)
+        loadChildren:() => import("./components/components/author/author-routing.module").then(x => x.AuthorRoutingModule)
       },
       {
         path: 'access-denied',

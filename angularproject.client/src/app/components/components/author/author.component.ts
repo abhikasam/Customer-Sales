@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { AuthorService } from '../../services/author.service';
+import { AuthorService } from '../../../../services/author.service';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
