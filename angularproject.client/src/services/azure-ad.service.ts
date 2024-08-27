@@ -7,7 +7,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class AzureAdService{
-  isUserLoggedIn: Subject<boolean> = new Subject<boolean>()
+  isUserLoggedIn: Subject<boolean> = new BehaviorSubject<boolean>(false)
   constructor(private authService: MsalService) { }
 
   getRoles():string[] {

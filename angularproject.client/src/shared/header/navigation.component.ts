@@ -9,6 +9,7 @@ import { RedirectRequest } from '@azure/msal-browser';
 import { NavService } from '../../services/nav.service';
 import { environment } from '../../environment';
 import { AzureAdService } from '../../services/azure-ad.service';
+import { BehaviorSubject } from 'rxjs';
 
 declare var $: any;
 
@@ -20,7 +21,7 @@ declare var $: any;
 })
 export class NavigationComponent implements OnInit {
   @Output() toggleSidebar = new EventEmitter<void>();
-  public isLoggedIn: boolean=false
+  public isLoggedIn = false
   public showSearch = false;
 
   constructor(
