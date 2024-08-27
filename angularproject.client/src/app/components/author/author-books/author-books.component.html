@@ -4,8 +4,9 @@
 
 <div class="row">
   <ng-container *ngFor="let book of books">
-    <div class="col-lg-3 col-md-6 col-sm-12">
-      {{ book.title }}
+    <div class="col-lg-3 col-md-6 col-sm-12 m-1">
+      <book-view [book]="book">
+      </book-view>
     </div>
   </ng-container>
 </div>

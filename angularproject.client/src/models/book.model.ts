@@ -14,4 +14,9 @@ export class Book {
     public categories: string[],
     public authors: Author[]
   ) { }
+
+  static empty() {
+    return new Book(0,'','','','',new Date(),'',0,'',[],[])
+  }
+
 }

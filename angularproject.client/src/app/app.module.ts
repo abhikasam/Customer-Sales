@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { AuthInterceptor } from '../services/auth-interceptor';
 import { AuthorModule } from './components/author/author.module';
+import { BookModule } from './components/book/book.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { AuthorModule } from './components/author/author.module';
   ],
   imports: [
     BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, DirectivesModule,
-    CommonModule, AuthorModule,
+    CommonModule, AuthorModule, BookModule,
     MsalModule.forRoot(
       msalConfiguration,
       {

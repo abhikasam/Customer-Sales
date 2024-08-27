@@ -27,6 +27,10 @@ export const routes: Routes = [
         loadChildren:() => import("./components/author/author-routing.module").then(x => x.AuthorRoutingModule)
       },
       {
+        path: 'books',
+        loadChildren: () => import("./components/book/book-routing.module").then(x => x.BookRoutingModule)
+      },
+      {
         path: 'access-denied',
         component: AccessDeniedComponent,
         pathMatch: "full"
