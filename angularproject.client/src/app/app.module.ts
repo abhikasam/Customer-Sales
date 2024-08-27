@@ -10,8 +10,8 @@ import { msalConfiguration } from './auth-config';
 import { DirectivesModule } from '../directives/directives.module';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
-import { AuthorModule } from './components/components/author/author.module';
 import { AuthInterceptor } from '../services/auth-interceptor';
+import { AuthorModule } from './components/author/author.module';
 
 @NgModule({
   declarations: [

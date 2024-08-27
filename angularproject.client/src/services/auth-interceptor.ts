@@ -15,9 +15,6 @@ export class AuthInterceptor implements HttpInterceptor {
       scopes: ['user.read']
     })).pipe(
       switchMap(tokenResponse => {
-        this.authService.instance.acquireTokenRedirect({
-          scopes: ['user.read']
-        });
         const clonedRequest = req.clone({
           setHeaders: {
             Authorization: `Bearer ${tokenResponse.idToken}`
