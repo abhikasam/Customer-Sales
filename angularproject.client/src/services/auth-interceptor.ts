@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
+import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { MsalService } from '@azure/msal-angular';
 import { from } from 'rxjs';
@@ -15,6 +15,9 @@ export class AuthInterceptor implements HttpInterceptor {
       scopes: ['user.read']
     })).pipe(
       switchMap(tokenResponse => {
+        this.authService.instance.acquireTokenRedirect({
+          scopes: ['user.read']
+        });
         const clonedRequest = req.clone({
           setHeaders: {
             Authorization: `Bearer ${tokenResponse.idToken}`
@@ -24,7 +27,8 @@ export class AuthInterceptor implements HttpInterceptor {
         return next.handle(clonedRequest);
       }),
       catchError(error => {
-        if (error instanceof InteractionRequiredAuthError) {
+        if (error instanceof InteractionRequiredAuthError
+          || (error instanceof HttpErrorResponse && error.status===401)) {
           this.authService.instance.acquireTokenRedirect({
             scopes: ['user.read']
           });
