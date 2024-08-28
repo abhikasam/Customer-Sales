@@ -18,8 +18,12 @@ namespace CustomersAPI.Models.Customer_Data
         public string LastName { get; set; }
 		public string EmailAddress { get; set; }
 		public string PhoneNumber { get; set; }
-		public DateTime CreationDate { get; set; }
+		public DateTime? CreationDate { get; set; }
+		public DateTime? OrderDate { get; set; }
+		public DateTime? ShipDate { get; set; }
 		public List<Address> Addresses { get; set; }
+		[BsonElement("details")]
+		public List<ProductItem> ProductItems { get; set; }
 		public int SalesOrderCount { get; set; }
     }
 }

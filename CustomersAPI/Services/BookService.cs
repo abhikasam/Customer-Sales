@@ -21,6 +21,10 @@ namespace CustomersAPI.Services
             return await collection.Find(_ => true).ToListAsync();
         }
 
+        public async Task<Book> GetBookAsync(int id)
+        {
+            return await collection.FindSync(x => x._id == id).FirstAsync();
+        }
         public List<string> GetAuthors()
         {
             return collection.AsQueryable()
@@ -31,11 +35,49 @@ namespace CustomersAPI.Services
                 .ToList();
         }
 
+        public List<string> GetCategories()
+        {
+            return collection.AsQueryable()
+                .SelectMany(i=>i.Categories)
+                .Where(i=>i.Length>0)
+                .Distinct()
+                .OrderBy(i => i)
+                .ToList();
+        }
         public List<Book> GetAuthorBooks(string author)
         {
             //var bsonDocument = new BsonDocument("authors",author);
             var bsonDocument = Builders<Book>.Filter.AnyEq(c => c.Authors, author);
             return collection.Find(bsonDocument).ToList();
+        }
+
+
+        public bool AddBook(Book book)
+        {
+            try
+            {
+                book._id=collection.AsQueryable().Max(i=>i._id)+1;
+                collection.InsertOne(book);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public Book DeleteBook(int id)
+        {
+            var book=collection.FindOneAndDelete(i=>i._id==id);
+            return book;
+        }
+
+        public Book UpdateBook(Book book)
+        {
+            //var update = Builders<Book>.Update
+            //            .Set(book.Isbn, book.Isbn);
+            var updated = collection.FindOneAndReplace(x=>x._id==book._id,book);
+            return updated;
         }
 
     }
