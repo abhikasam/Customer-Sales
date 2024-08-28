@@ -19,6 +19,15 @@ export const SIDEBAR_ROUTES: RouteInfo[] = [
     extralink: false,
     submenu: [],
     roles: []
-   }
+  },
+  {
+    path: '/books/all',
+    title: 'books',
+    icon: 'bi bi-book',
+    class: '',
+    extralink: false,
+    submenu: [],
+    roles: []
+  }
 ];
 

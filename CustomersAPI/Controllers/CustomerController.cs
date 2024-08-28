@@ -1,4 +1,6 @@
-﻿using CustomersAPI.Models.Customer_Data;
+﻿using CustomersAPI.Code;
+using CustomersAPI.Models;
+using CustomersAPI.Models.Customer_Data;
 using CustomersAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,16 +18,18 @@ namespace CustomersAPI.Controllers
             this.customerService = customerService;
         }
 
-        [HttpGet]
+        [HttpGet("/GetAll")]
         public async Task<List<Customer>> GetCustomers()
         {
             return await customerService.GetAsync();
         }
 
-        [HttpGet("{skip}/{take}")]
-        public List<Customer> GetCustomers(int skip,int take)
+        [HttpGet]
+        public IEnumerable<Customer> GetCustomers([FromQuery]XPagination xPagination)
         {
-            return customerService.Get(skip,take);
+            var  customers = customerService.Get().Paginate(xPagination);
+            xPagination.SetXPagination(Response);
+            return customers;
         }
     }
 }

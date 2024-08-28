@@ -21,12 +21,9 @@ namespace CustomersAPI.Services
         {
             return await _customerCollection.Find(_=> true).Limit(10).ToListAsync();
         }
-        public List<Customer> Get(int skip,int limit)
+        public IQueryable<Customer> Get()
         {
-            int skipItems=skip*limit;
-            var customers = (from c in _customerCollection.AsQueryable()
-                             select c).Skip(skipItems).Take(limit);
-            return customers.ToList();
+            return _customerCollection.AsQueryable();
         }
 
         public List<string> GetCustomerTypes()

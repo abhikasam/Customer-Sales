@@ -1,3 +1,58 @@
-<div>
-  {{book.title}}
+<div class="row">
+  <div class="col-lg-3 col-md-6 col-sm-12">
+    <img [src]="book.thumbnailUrl" />
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-12 text-start">
+    <div class="row m-1">
+      <div class="col">
+        <span class="shadow-sm bg-body-tertiary fs-7 rounded px-3 py-1">
+          {{book.title}}
+        </span>
+      </div>
+    </div>
+    <div class="row m-1">
+      <div class="col">
+        <span class="shadow-sm badge text-bg-warning fs-8 rounded px-3 py-1 m-1">
+          {{book.pageCount}} pages
+        </span>
+        <span class="shadow-sm badge text-bg-dark fs-8 rounded px-3 py-1">
+          {{book.status}}
+        </span>
+      </div>
+    </div>
+    <div class="row m-1">
+      <div class="col">
+        <span class="shadow-sm badge text-bg-secondary fs-8 rounded px-3 py-1">
+          published on : {{book.publishedDate}}
+        </span>
+      </div>
+    </div>
+    <div class="row m-1">
+      <div class="col">
+        <span class="shadow-sm badge text-bg-info fs-8 rounded px-3 py-1">
+          isbn : {{book.isbn}}
+        </span>
+      </div>
+    </div>
+    <div class="row m-1">
+      <div class="col">
+        <span class="shadow-sm badge text-bg-success fs-8 rounded px-3 py-1">
+          {{book.authors}}
+        </span>
+      </div>
+    </div>
+    <div class="row m-1">
+      <div class="col">
+        <span class="shadow-sm badge text-bg-danger fs-8 rounded px-3 py-1">
+          {{book.categories}}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="book.shortDescription" class="shadow-sm bg-body-tertiary rounded p-3 m-3">
+  {{book.shortDescription}}
+</div>
+<div *ngIf="book.longDescription" class="shadow-sm bg-body-tertiary rounded p-3 m-3">
+  {{book.longDescription}}
 </div>
