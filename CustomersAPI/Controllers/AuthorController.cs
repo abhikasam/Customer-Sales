@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CustomersAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     [Authorize]
     public class AuthorController : ControllerBase
@@ -18,13 +17,15 @@ namespace CustomersAPI.Controllers
             this.bookService = bookService;
         }
 
+
         [HttpGet]
+        [Route("api/author/all")]
         public IEnumerable<string> Get()
         {
             return bookService.GetAuthors();
         }
 
-        [HttpGet("{author}")]
+        [HttpGet("api/author/{author}")]
         public List<Book> GetBooks(string author)
         {
             return bookService.GetAuthorBooks(author);

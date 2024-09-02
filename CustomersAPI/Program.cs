@@ -1,4 +1,5 @@
 
+using CustomersAPI.Models;
 using CustomersAPI.Models.CollectionSettings;
 using CustomersAPI.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -12,6 +13,7 @@ using Microsoft.Identity.Web.UI;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MongoDB.Bson.Serialization.Conventions;
+using MongoDB.Driver;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -49,10 +51,13 @@ namespace CustomersAPI
                     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                 });
 
-            ConventionRegistry.Register("CamelCase",new ConventionPack()
+
+            ConventionRegistry.Register("CamelCase", new ConventionPack()
             {
-                new CamelCaseElementNameConvention()
-            },_=> true);
+                new CamelCaseElementNameConvention(),
+                new IgnoreExtraElementsConvention(true)
+            }, _ => true);
+
 
             builder.Services.AddMongoDbCollectionSettings(builder.Configuration);
             builder.Services.AddMongoDbCollectionServices();

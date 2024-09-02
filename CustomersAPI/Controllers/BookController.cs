@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CustomersAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class BookController : ControllerBase
     {
@@ -16,25 +15,25 @@ namespace CustomersAPI.Controllers
             this.bookService = bookService;
         }
 
-        [HttpGet]
+        [HttpGet("api/books")]
         public async Task<List<Book>> GetAsync()
         {
             return await bookService.GetAsync();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("api/books/{id}")]
         public async Task<Book> GetBookAsync([FromRoute]int id)
         {
             return await bookService.GetBookAsync(id); 
         }
 
-        [HttpGet("categories")]
+        [HttpGet("api/books/categories")]
         public List<string> GetCategories()
         {
             return bookService.GetCategories();
         }
 
-        [HttpPost]
+        [HttpPost("api/books")]
         public IActionResult Post([FromBody]Book book)
         {
             var bookAdded = bookService.AddBook(book);
@@ -45,13 +44,13 @@ namespace CustomersAPI.Controllers
             return NotFound(book);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("api/books/{id}")]
         public IActionResult Delete([FromRoute]int id)
         {
             return Ok(bookService.DeleteBook(id));
         }
 
-        [HttpPut]
+        [HttpPut("api/books")]
         public IActionResult Put([FromBody]Book book)
         {
             return Ok(bookService.UpdateBook(book));

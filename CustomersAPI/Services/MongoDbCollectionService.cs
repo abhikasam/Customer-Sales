@@ -4,8 +4,8 @@
     {
         public static void AddMongoDbCollectionServices(this IServiceCollection services)
         {
-            services.AddSingleton<CustomerService>();
-            services.AddSingleton<BookService>();
+            services.AddScoped<CustomerService>();
+            services.AddScoped<BookService>();
         }
     }
 }

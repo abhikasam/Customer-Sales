@@ -1,8 +1,7 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 namespace CustomersAPI.Models.Customer_Data
 {
-	[BsonIgnoreExtraElements]
     public partial class Customer
     {
         [BsonId]
@@ -21,10 +20,11 @@ namespace CustomersAPI.Models.Customer_Data
 		public DateTime? CreationDate { get; set; }
 		public DateTime? OrderDate { get; set; }
 		public DateTime? ShipDate { get; set; }
-		public List<Address> Addresses { get; set; }
-		[BsonElement("details")]
-		public List<ProductItem> ProductItems { get; set; }
-		public int SalesOrderCount { get; set; }
+		[BsonIgnoreIfNull]
+		public ICollection<Address> Addresses { get; set; }
+		[BsonIgnoreIfNull]
+		public ICollection<ProductItem> Details { get; set; }
+		public int? SalesOrderCount { get; set; }
     }
 }
 
