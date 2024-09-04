@@ -15,6 +15,7 @@ export class AuthInterceptor implements HttpInterceptor {
       scopes: ['user.read']
     })).pipe(
       switchMap(tokenResponse => {
+        console.log(tokenResponse)
         const clonedRequest = req.clone({
           setHeaders: {
             Authorization: `Bearer ${tokenResponse.idToken}`

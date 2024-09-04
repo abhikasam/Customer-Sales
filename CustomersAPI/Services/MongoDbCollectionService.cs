@@ -6,6 +6,8 @@
         {
             services.AddScoped<CustomerService>();
             services.AddScoped<BookService>();
+            services.AddScoped<AuthService>();
+            services.AddScoped<RoleService>();
         }
     }
 }

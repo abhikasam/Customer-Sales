@@ -19,13 +19,13 @@ namespace CustomersAPI.Controllers
 
 
         [HttpGet]
-        [Route("api/author/all")]
+        [Route("api/authors")]
         public IEnumerable<string> Get()
         {
             return bookService.GetAuthors();
         }
 
-        [HttpGet("api/author/{author}")]
+        [HttpGet("api/authors/{author}/books")]
         public List<Book> GetBooks(string author)
         {
             return bookService.GetAuthorBooks(author);

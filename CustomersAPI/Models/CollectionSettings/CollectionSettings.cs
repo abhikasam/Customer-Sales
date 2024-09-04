@@ -19,6 +19,12 @@
             services.Configure<BooksCollectionSettings>(
                 configuration.GetSection("MongoDbCollectionSettings:Book")
                 );
+            services.Configure<AuthCollectionSettings>(
+                configuration.GetSection("MongoDbCollectionSettings:Auth")
+                );
+            services.Configure<RoleCollectionSettings>(
+                configuration.GetSection("MongoDbCollectionSettings:Role")
+                );
         }
     }
 
