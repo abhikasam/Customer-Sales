@@ -39,7 +39,8 @@ export class AppComponent implements OnInit, OnDestroy {
       )
       .subscribe(x => {
         this.isUserLoggedIn = !!this.msalService.instance.getAllAccounts().length
-        this.msalService.instance.setActiveAccount(this.msalService.instance.getAllAccounts()[0])
+        let account = this.msalService.instance.getAllAccounts()[0]
+        this.msalService.instance.setActiveAccount(account)
         this.azureAdService.isUserLoggedIn.next(!!this.msalService.instance.getAllAccounts().length)
       })
   }

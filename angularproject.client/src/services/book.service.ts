@@ -10,7 +10,7 @@ export class BookService {
   constructor(public http: HttpClient) { }
 
   getAll() {
-    return this.http.get<Book[]>('/api/book')
+    return this.http.get<Book[]>('/api/books')
   }
 
 }

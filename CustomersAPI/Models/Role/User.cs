@@ -9,5 +9,6 @@ namespace CustomersAPI.Models.Role
         public string _id { get; set; }
         public string FullName { get; set; }
         public string UserName { get; set; }
+        public List<AppUserRole> UserRoles { get; set; }
     }
 }

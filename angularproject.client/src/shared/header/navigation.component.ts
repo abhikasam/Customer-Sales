@@ -10,6 +10,7 @@ import { NavService } from '../../services/nav.service';
 import { environment } from '../../environment';
 import { AzureAdService } from '../../services/azure-ad.service';
 import { BehaviorSubject } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 
 declare var $: any;
 
@@ -27,19 +28,13 @@ export class NavigationComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private msalService: MsalService,
-    @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
     private azureAdService: AzureAdService
   )
   { }
 
 
   login() {
-    if (this.msalGuardConfig.authRequest) {
-      this.msalService.loginRedirect({ ...this.msalGuardConfig.authRequest } as RedirectRequest).subscribe()
-    }
-    else {
-      this.msalService.loginRedirect()
-    }
+    this.azureAdService.login()
   }
 
 
@@ -53,6 +48,11 @@ export class NavigationComponent implements OnInit {
   ngOnInit(): void {
     this.azureAdService.isUserLoggedIn.subscribe(x => {
       this.isLoggedIn=x
+    })
+    this.msalService.handleRedirectObservable().subscribe(res => {
+      if (res) {
+        this.azureAdService.setUserRoles(res.account.username)
+      }
     })
   }
 }

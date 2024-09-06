@@ -1,11 +1,13 @@
 ﻿using CustomersAPI.Models.Role;
 using CustomersAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomersAPI.Controllers
 {
     [ApiController]
+    [Authorize]
     public class AuthController : ControllerBase
     {
         private readonly AuthService authService;
@@ -27,7 +29,8 @@ namespace CustomersAPI.Controllers
                     UserName = User.Claims.FirstOrDefault(i => i.Type == "preferred_username").Value,
                     FullName = User.Claims.FirstOrDefault(i => i.Type == "name").Value
                 };
-                authService.addUser(user);  
+                authService.addUser(user);
+                roleService.AddRoles(user.UserName,new string[] { "ADMIN","USER" });
             }
             return Ok();
         }

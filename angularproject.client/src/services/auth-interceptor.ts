@@ -5,32 +5,21 @@ import { MsalService } from '@azure/msal-angular';
 import { from } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { InteractionRequiredAuthError } from '@azure/msal-browser';
+import { AzureAdService } from './azure-ad.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authService: MsalService) { }
+  constructor(private msalService: MsalService, private azureAdService: AzureAdService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return from(this.authService.instance.acquireTokenSilent({
-      scopes: ['user.read']
-    })).pipe(
+    return from(this.azureAdService.getToken()).pipe(
       switchMap(tokenResponse => {
-        console.log(tokenResponse)
         const clonedRequest = req.clone({
           setHeaders: {
-            Authorization: `Bearer ${tokenResponse.idToken}`
+            Authorization: `Bearer ${tokenResponse}`
           }
         });
         return next.handle(clonedRequest);
-      }),
-      catchError(error => {
-        if (error instanceof InteractionRequiredAuthError
-          || (error instanceof HttpErrorResponse && error.status===401)) {
-          this.authService.instance.acquireTokenRedirect({
-            scopes: ['user.read']
-          });
-        }
-        return throwError(()=>error);
       })
     );
   }

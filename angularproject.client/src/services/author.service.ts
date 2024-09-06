@@ -12,11 +12,11 @@ export class AuthorService{
   constructor(public http: HttpClient) { }
 
   getAuthors() {
-    return this.http.get<string[]>('/api/author')
+    return this.http.get<string[]>('/api/authors')
   }
 
   getAuthorBooks(author: string) {
-    return this.http.get<Book[]>('/api/author/' + author)
+    return this.http.get<Book[]>('/api/authors/' + author+'/books')
   }
 
 }
