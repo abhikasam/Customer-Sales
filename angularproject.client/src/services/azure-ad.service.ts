@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
-import { InteractionRequiredAuthError } from '@azure/msal-browser';
+import { AuthenticationResult, InteractionRequiredAuthError } from '@azure/msal-browser';
 import { BehaviorSubject, Observable, Subject, catchError, from, map, switchMap, throwError } from 'rxjs';
 
 @Injectable({
@@ -19,8 +19,11 @@ export class AzureAdService{
     return this.roles.value
   }
 
-  setUserRoles(username: string) {
-    this.http.get<string[]>('/api/user/' + username).subscribe(res => {
+  setUserRoles(authenticationResult: AuthenticationResult) {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${authenticationResult.idToken}`
+    })
+    this.http.get<string[]>('/api/user/' + authenticationResult.account.username+'/roles', { headers }).subscribe(res => {
       console.log(res)
       this.roles.next(res)
     })
@@ -30,9 +33,9 @@ export class AzureAdService{
     return from(this.msalService.instance.acquireTokenSilent({
       scopes: ['user.read']
     })).pipe(
-      map(token => {
-        console.log(token)
-        return token.idToken
+      map(result => {
+        this.setUserRoles(result)
+        return result.idToken
       }),
       catchError(error => {
         if (error instanceof InteractionRequiredAuthError
@@ -48,10 +51,7 @@ export class AzureAdService{
     this.msalService.loginPopup({ scopes: ['user.read'] }).subscribe({
       next: (result) => {
         let token = result.idToken
-        let headers = new HttpHeaders({
-          Authorization: `Bearer ${token}`
-        })
-        this.setUserRoles(result.account.username)
+        this.setUserRoles(result)
       },
       error: (error) => {
         console.log(error)

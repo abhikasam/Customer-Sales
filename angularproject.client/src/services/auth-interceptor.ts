@@ -12,6 +12,9 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private msalService: MsalService, private azureAdService: AzureAdService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (/\/api\/user\/[^\/]+\/roles/.test(req.url) && req.method === "GET") {
+      return next.handle(req);
+    }
     return from(this.azureAdService.getToken()).pipe(
       switchMap(tokenResponse => {
         const clonedRequest = req.clone({

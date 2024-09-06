@@ -49,7 +49,7 @@ namespace CustomersAPI.Controllers
             return Ok();
         }
 
-        [HttpGet("/api/user/{username}")]
+        [HttpGet("/api/user/{username}/roles")]
         public IActionResult Get(string username)
         {
             return Ok(roleService.Get(username).Select(i=>i.RoleName).ToList());

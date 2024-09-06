@@ -51,7 +51,7 @@ export class NavigationComponent implements OnInit {
     })
     this.msalService.handleRedirectObservable().subscribe(res => {
       if (res) {
-        this.azureAdService.setUserRoles(res.account.username)
+        this.azureAdService.setUserRoles(res)
       }
     })
   }

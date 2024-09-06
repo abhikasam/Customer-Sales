@@ -9,15 +9,15 @@ import { AzureAdService } from '../services/azure-ad.service';
     providedIn:'root'
 })
 export class AuthorizedRolesDirective {
-  private roles: string[] = []
+  private roles: string[]=[]
   
-  @Input() set authroles(allowedRoles: string[]) {
-    this.roles = allowedRoles
+  @Input() set authroles(allowedRoles: string) {
+    this.roles = allowedRoles.split(",")
     this.updateView()
   }
 
   constructor(
-    private authService: AzureAdService,
+    private azureADService: AzureAdService,
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef
   )
@@ -28,7 +28,11 @@ export class AuthorizedRolesDirective {
 
   updateView() {
     this.viewContainer.clear()
-    const userroles = this.authService.getRoles()
+    let userroles: string[] = []
+    this.azureADService.roles.subscribe((roles: string[]) => {
+      userroles = roles
+    })
+    console.log(this.roles, userroles)
     if (!this.roles.length || this.roles.some(r => userroles.includes(r))) {
       this.viewContainer.createEmbeddedView(this.templateRef)
     }

@@ -4,6 +4,7 @@ import { ViewComponent } from './view/view.component';
 import { DetailComponent } from './detail/detail.component';
 import { BookRoutingModule } from './book-routing.module';
 import { IndexComponent } from './index/index.component';
+import { DirectivesModule } from '../../../directives/directives.module';
 
 
 
@@ -14,7 +15,7 @@ import { IndexComponent } from './index/index.component';
     IndexComponent
   ],
   imports: [
-    CommonModule, BookRoutingModule
+    CommonModule, BookRoutingModule, DirectivesModule
   ],
   exports: [ViewComponent]
 })
