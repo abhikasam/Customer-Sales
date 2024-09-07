@@ -19,7 +19,7 @@ namespace CustomersAPI.Services
 
         public async Task<List<Customer>> GetAsync()
         {
-            return await collection.Find(_=> true).Limit(10).ToListAsync();
+            return await collection.Find(_=> true).ToListAsync();
         }
         public IQueryable<Customer> Get()
         {

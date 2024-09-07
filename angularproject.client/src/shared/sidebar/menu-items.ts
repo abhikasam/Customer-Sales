@@ -28,6 +28,15 @@ export const SIDEBAR_ROUTES: RouteInfo[] = [
     extralink: false,
     submenu: [],
     roles: []
+  },
+  {
+    path: '/customers',
+    title: 'customers',
+    icon: 'bi bi-person-fill-check',
+    class: '',
+    extralink: false,
+    submenu: [],
+    roles:[]
   }
 ];
 

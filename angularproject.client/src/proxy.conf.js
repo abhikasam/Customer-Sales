@@ -10,7 +10,8 @@ const PROXY_CONFIG = [
       "/api/author",
       "/api/book",
       "/api/auth",
-      "/api/user"
+      "/api/user",
+      "/api/v1"
     ],
     target,
     secure: false

@@ -13,6 +13,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AuthInterceptor } from '../services/auth-interceptor';
 import { AuthorModule } from './components/author/author.module';
 import { BookModule } from './components/book/book.module';
+import { CustomerModule } from './components/customer/customer.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { BookModule } from './components/book/book.module';
   ],
   imports: [
     BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, DirectivesModule,
-    CommonModule, AuthorModule, BookModule,
+    CommonModule, AuthorModule, BookModule,CustomerModule,
     MsalModule.forRoot(
       msalConfiguration,
       {
