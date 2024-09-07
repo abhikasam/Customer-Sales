@@ -19,6 +19,10 @@ export class AzureAdService{
     return this.roles.value
   }
 
+  setRole(role: string) {
+    this.roles.next([role])
+  }
+
   setUserRoles(authenticationResult: AuthenticationResult) {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${authenticationResult.idToken}`
@@ -34,7 +38,7 @@ export class AzureAdService{
       scopes: ['user.read']
     })).pipe(
       map(result => {
-        this.setUserRoles(result)
+//        this.setUserRoles(result)
         return result.idToken
       }),
       catchError(error => {

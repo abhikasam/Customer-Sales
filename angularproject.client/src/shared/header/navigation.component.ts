@@ -22,6 +22,7 @@ declare var $: any;
 })
 export class NavigationComponent implements OnInit {
   @Output() toggleSidebar = new EventEmitter<void>();
+  public userRole = 'USER'
   public isLoggedIn = false
   public showSearch = false;
 
@@ -51,8 +52,15 @@ export class NavigationComponent implements OnInit {
     })
     this.msalService.handleRedirectObservable().subscribe(res => {
       if (res) {
-        this.azureAdService.setUserRoles(res)
+//        this.azureAdService.setUserRoles(res)
       }
     })
   }
+
+  changeRole(role: string): void{
+    this.azureAdService.setRole(role)
+    this.userRole=role
+  }
+
+
 }

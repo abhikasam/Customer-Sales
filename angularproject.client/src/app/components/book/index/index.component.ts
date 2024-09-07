@@ -15,6 +15,7 @@ export class IndexComponent implements OnInit {
     this.bookService.getAll().subscribe(x => {
       this.books=x
     })
+
   }
 
 }

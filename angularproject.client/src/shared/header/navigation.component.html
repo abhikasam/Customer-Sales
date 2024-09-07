@@ -5,6 +5,21 @@
   <!-- ============================================================== -->
   <!-- create new -->
   <!-- ============================================================== -->
+  <li class="nav-item" ngbDropdown placement="bottom-end" *ngIf="isLoggedIn">
+    <a ngbDropdownToggle
+       class="nav-link waves-effect waves-dark pro-pic"
+       href="javascript:void(0)"
+       data-toggle="dropdown"
+       aria-haspopup="true"
+       aria-expanded="false">
+      <span class="ms-2">{{userRole}}</span>
+    </a>
+    <div class="dropdown-menu-right" ngbDropdownMenu>
+      <a class="dropdown-item" href="javascript:void(0)" (click)="changeRole('ADMIN')">Admin</a>
+      <a class="dropdown-item" href="javascript:void(0)" (click)="changeRole('USER')" >User</a>
+      <a class="dropdown-item" href="javascript:void(0)" (click)="changeRole('AUTHOR')">Author</a>
+    </div>
+  </li>
 </ul>
 <!-- ============================================================== -->
 <!-- Right side toggle and nav items -->
@@ -19,8 +34,8 @@
       Login
     </a>
   </li>
-  <li class="nav-item" ngbDropdown placement="bottom-end">
-    <a  *ngIf="isLoggedIn" ngbDropdownToggle
+  <li class="nav-item" ngbDropdown placement="bottom-end" *ngIf="isLoggedIn">
+    <a ngbDropdownToggle
        class="nav-link waves-effect waves-dark pro-pic"
        href="javascript:void(0)"
        data-toggle="dropdown"
@@ -33,7 +48,7 @@
 
       <span class="ms-2">John Deo</span>
     </a>
-    <div *ngIf="isLoggedIn" class="dropdown-menu-right" ngbDropdownMenu>
+    <div class="dropdown-menu-right" ngbDropdownMenu>
       <a class="dropdown-item" href="javascript:void(0)"> My Profile</a>
       <a class="dropdown-item" href="javascript:void(0)"> My Balance</a>
       <a class="dropdown-item" href="javascript:void(0)"> Inbox</a>
